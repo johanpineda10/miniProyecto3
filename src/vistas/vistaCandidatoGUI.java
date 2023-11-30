@@ -10,24 +10,15 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import controlador.ControladorCandidatos;
-
 import java.awt.Font;
 import modelo.Ciudades;
 import modelo.Partidos;
 
-import java.awt.event.*;
-
 public class vistaCandidatoGUI extends JFrame implements vistaCandidatos{
 
-    private controlador.ControladorCandidatos controlador;
-
-    public void setControlador(ControladorCandidatos controlador) {
-        this.controlador = controlador;
-    }
-
     public static JFrame frame;
-    //private String[] ciudades = {"Cali", "Buga", "Palmira", "Tulua", "Cartago", "Bugalagrande", "Buenaventura", "Yumbo"};
-    //private String[] partidos = {"Partido Liberal", "Partido Conservador", "Liga", "AICO", "Partido Verde", "Union Patriótica", "Centro Democratico", "Partido de la U", "Cambio Radical"};
+    private String[] ciudades = {"Cali", "Buga", "Palmira", "Tulua", "Cartago", "Bugalagrande", "Buenaventura", "Yumbo"};
+    private String[] partidos = {"Partido Liberal", "Partido Conservador", "Liga", "AICO", "Partido Verde", "Union Patriótica", "Centro Democratico", "Partido de la U", "Cambio Radical"};
     private JMenuBar barra;
     private JMenu creacion, visualizar, votos, salir;
     public static JMenuItem crear, modificar, eliminar, verNombre, verTodos, sali, canVotos, resulVotos, conFinal;
@@ -96,63 +87,9 @@ public class vistaCandidatoGUI extends JFrame implements vistaCandidatos{
         modificar.addActionListener(candidato);
         eliminar.addActionListener(candidato);
         sali.addActionListener(candidato);
-        frame.setVisible(true); 
-        
-
-        /*crear.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                controlador.mostrarVentanaInsertar();
-            }
-        });
-
-        modificar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                controlador.mostrarVentanaActualizar();
-            }
-        });
-
-        eliminar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                controlador.mostrarVentanaEliminar();
-            }
-        });
-
-        verNombre.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                controlador.mostrarVentanaBuscar();
-            }
-        });
-
-        verTodos.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                controlador.mostrarVentanaListar();
-            }
-        });
-
-        canVotos.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                controlador.mostrarVentanaVotos();
-            }
-        });
-
-        resulVotos.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                controlador.mostrarVentanaResultados();
-            }
-        });
-
-        conFinal.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                controlador.mostrarVentanaGanador();
-            }
-        });
-
-        sali.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });*/
-        
+        verNombre.addActionListener(candidato);
+        verTodos.addActionListener(candidato);
+        frame.setVisible(true);
     }
 
     @Override
@@ -215,5 +152,4 @@ public class vistaCandidatoGUI extends JFrame implements vistaCandidatos{
         throw new UnsupportedOperationException("Unimplemented method 'setCiudades'");
     }
 
-    
 }
