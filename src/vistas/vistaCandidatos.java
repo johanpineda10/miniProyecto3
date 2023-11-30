@@ -6,6 +6,11 @@ public interface vistaCandidatos {
     public String getCedula();
     public String getPartido();
     public String getCiudad();
-    public String getIdeologia();
+    public int getIdeologia();
+    public void setNombre();
+    public void setCedula();
+    public void setIdeologia();
+    public void setPartido();
+    public void setCiudades();
     
 }
