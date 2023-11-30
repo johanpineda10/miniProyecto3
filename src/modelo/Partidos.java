@@ -1,0 +1,5 @@
+package modelo;
+
+public enum Partidos {
+    ALIANZAVERDE, LIBERAL, CONSERVADOR, U, MIRA, DEMOCRATICO, PACTOHISTORICO
+}
