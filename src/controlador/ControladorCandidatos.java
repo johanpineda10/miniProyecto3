@@ -45,18 +45,14 @@ public class ControladorCandidatos  implements ActionListener{
             if(e.getSource() == vistaCandidatoGUI.crear){
                 mostrarVentanaInsertar();
             }
+            if(e.getSource() == vistaCandidatoGUI.modificar){
+                mostrarVentanaActualizar();
+            }
             if(e.getSource() == vistaCandidatoGUI.sali){
             vistaCandidatoGUI.frame.setVisible(false);
             vistaCandidatoGUI.frame.dispose();
-            System.out.println("Si");
             }
         }
-
-        /*candidato.setNombre(vista.getNombre());
-        candidato.setCedula(vista.getCedula());
-        candidato.setIdeologia(vista.getIdeologia());
-        candidato.setCiudades(""+vista.getCiudad());
-        candidato.setPartido(""+vista.getPartido());*/
 
     }
     public void mostrarVentanaInsertar() {
