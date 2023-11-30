@@ -45,18 +45,23 @@ public class ControladorCandidatos  implements ActionListener{
             if(e.getSource() == vistaCandidatoGUI.crear){
                 mostrarVentanaInsertar();
             }
+            if(e.getSource() == vistaCandidatoGUI.modificar){
+                mostrarVentanaActualizar();
+            }
+            if(e.getSource() == vistaCandidatoGUI.eliminar){
+                mostrarVentanaEliminar();
+            }
+            if(e.getSource()== vistaCandidatoGUI.verNombre){
+                mostrarVentanaBuscar();
+            }
+            if(e.getSource() == vistaCandidatoGUI.verTodos){
+                mostrarVentanaListar();
+            }
             if(e.getSource() == vistaCandidatoGUI.sali){
             vistaCandidatoGUI.frame.setVisible(false);
             vistaCandidatoGUI.frame.dispose();
-            System.out.println("Si");
             }
         }
-
-        /*candidato.setNombre(vista.getNombre());
-        candidato.setCedula(vista.getCedula());
-        candidato.setIdeologia(vista.getIdeologia());
-        candidato.setCiudades(""+vista.getCiudad());
-        candidato.setPartido(""+vista.getPartido());*/
 
     }
     public void mostrarVentanaInsertar() {
@@ -255,23 +260,89 @@ public class ControladorCandidatos  implements ActionListener{
     }
 
     public void mostrarVentanaVotos() {
-        //logica
+        for (Candidatos candidato : candidatos) {
+            String votosStr = JOptionPane.showInputDialog("Ingrese la cantidad de votos para " + candidato.getNombre() + ":");
+            if (votosStr == null) {
+                return;
+            }
+
+            try {
+                int votosIngresar = Integer.parseInt(votosStr);
+                candidato.setVotos(votosIngresar);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Ingrese un numero de votos valido.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        mostrarMensaje("Votos ingresados exitosamente.");
+        mostrarVentanaResultados();
     }
 
     public void mostrarVentanaResultados() {
-        //logica
+        candidatos.sort((c1, c2) -> Integer.compare(c2.getVotos(), c1.getVotos()));
+        StringBuilder resultados = new StringBuilder("Resultados de las Elecciones (de mayor a menor número de votos):\n");
+    
+        for (Candidatos candidato : candidatos) {
+            resultados.append("Nombre: ").append(candidato.getNombre()).append("\n");
+            resultados.append("Cédula: ").append(candidato.getCedula()).append("\n");
+            resultados.append("Partido Político: ").append(candidato.getPartido()).append("\n");
+            resultados.append("Votos: ").append(candidato.getVotos()).append("\n\n");
+        }
+    
+        JTextArea textArea = new JTextArea(resultados.toString());
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+    
+        JFrame resultadosFrame = new JFrame("Resultados de las Elecciones");
+        resultadosFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        resultadosFrame.getContentPane().add(scrollPane);
+        resultadosFrame.pack();
+        resultadosFrame.setVisible(true);
+    
+        mostrarVentanaGanador();
+        mostrarCiudadesConMenosCandidatos();
     }
 
     public void mostrarVentanaGanador() {
-        //logica
-    }
-    public void mostrarCiudadesConMenosCandidatos() {
-        //logica
-    }
+        Candidatos ganador = candidatos.get(0);
     
+        StringBuilder mensajeGanador = new StringBuilder("Ganador de las Elecciones:\n");
+        mensajeGanador.append("Nombre: ").append(ganador.getNombre()).append("\n");
+        mensajeGanador.append("Cédula: ").append(ganador.getCedula()).append("\n");
+        mensajeGanador.append("Partido Político: ").append(ganador.getPartido()).append("\n");
+    
+        JOptionPane.showMessageDialog(null, mensajeGanador.toString(), "Ganador de las Elecciones", JOptionPane.INFORMATION_MESSAGE);
+    }
 
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showOptionDialog(null, mensaje, "Mensaje", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"OK"}, "OK");
+    }
+
+    public void mostrarCiudadesConMenosCandidatos() {
+        Map<String, Integer> ciudadCandidatosCount = new HashMap<>();
+
+        for (Candidatos candidato : candidatos) {
+            String ciudad = candidato.getCiudad();
+            ciudadCandidatosCount.put(ciudad, ciudadCandidatosCount.getOrDefault(ciudad, 0) + 1);
+        }
+
+        List<Map.Entry<String, Integer>> sortedCiudades = ciudadCandidatosCount.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue())
+                .collect(Collectors.toList());
+
+        int numCiudadesAMostrar = Math.min(3, sortedCiudades.size());
+
+        StringBuilder ciudadesConMenosCandidatos = new StringBuilder("Ciudades con menos candidatos inscritos:\n");
+
+        for (int i = 0; i < numCiudadesAMostrar; i++) {
+            String ciudad = sortedCiudades.get(i).getKey();
+            int candidatosCount = sortedCiudades.get(i).getValue();
+            ciudadesConMenosCandidatos.append(ciudad).append(": ").append(candidatosCount).append(" candidatos\n");
+        }
+
+        JOptionPane.showMessageDialog(null, ciudadesConMenosCandidatos.toString());
     }
 
 }
