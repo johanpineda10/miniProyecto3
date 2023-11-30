@@ -2,6 +2,7 @@ package vistas;
 
 import java.util.Scanner;
 
+import controlador.ControladorCandidatos;
 import modelo.Ciudades;
 import modelo.Partidos;
 
@@ -13,7 +14,7 @@ public class vistaCandidatoConsola implements vistaCandidatos{
     Ciudades ciudad;
     
     @Override
-    public void iniciar() {
+    public void iniciar(ControladorCandidatos candidato) {
         System.out.println("Bienvenido candidato");
         System.out.println("Ingrese la opcion deseada: ");
         System.out.println("1. Agregar candidato");
@@ -24,6 +25,7 @@ public class vistaCandidatoConsola implements vistaCandidatos{
         System.out.println("6. Salir");
         Scanner scaner = new Scanner(System.in);
         int opc = scaner.nextInt();
+        scaner.nextLine(); 
 
         switch (opc) {
             case 1:
@@ -39,11 +41,14 @@ public class vistaCandidatoConsola implements vistaCandidatos{
                 ciudad = Ciudades.valueOf(ciudadOri.toUpperCase());
                 System.out.println("Ingrese su ideologia politica (1. Izquierda - 2. Derecha)");
                 ideologia = scaner.nextInt();
+                scaner.nextLine();
+                System.out.println("Candidato creado exitosamente");
                 break;
         
             default:
-                System.out.println("Opcion no valida");;
+                System.out.println("Opcion no valida");
         }
+        candidato.actionPerformed(null);
     }
 
     @Override
@@ -57,13 +62,13 @@ public class vistaCandidatoConsola implements vistaCandidatos{
     }
 
     @Override
-    public String getPartido() {
-        return ""+partido;
+    public Partidos getPartido() {
+        return partido;
     }
 
     @Override
-    public String getCiudad() {
-        return ""+ciudad;
+    public Ciudades getCiudad() {
+        return ciudad;
     }
 
     @Override

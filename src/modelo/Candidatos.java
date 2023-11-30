@@ -3,8 +3,9 @@ package modelo;
 public class Candidatos {
     private String nombre, cedula;
     private int ideologia;
-    private Ciudades ciudades;
-    private Partidos partido;
+    private String ciudades;
+    private String partido;
+    
     public String getNombre() {
         return nombre;
     }
@@ -23,16 +24,16 @@ public class Candidatos {
     public void setIdeologia(int ideologia) {
         this.ideologia = ideologia;
     }
-    public Ciudades getCiudades() {
+    public String getCiudades() {
         return ciudades;
     }
-    public void setCiudades(Ciudades ciudades) {
+    public void setCiudades(String ciudades) {
         this.ciudades = ciudades;
     }
-    public Partidos getPartido() {
+    public String getPartido() {
         return partido;
     }
-    public void setPartido(Partidos partido) {
+    public void setPartido(String partido) {
         this.partido = partido;
     }
 
