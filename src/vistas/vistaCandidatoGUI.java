@@ -153,5 +153,3 @@ public class vistaCandidatoGUI extends JFrame implements vistaCandidatos{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setCiudades'");
     }
-
-}
