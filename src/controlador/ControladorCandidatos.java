@@ -57,12 +57,22 @@ public class ControladorCandidatos  implements ActionListener{
             if(e.getSource() == vistaCandidatoGUI.verTodos){
                 mostrarVentanaListar();
             }
+
+            if(e.getSource() == vistaCandidatoGUI.canVotos){
+                mostrarVentanaVotos();
+            }
+            if(e.getSource() == vistaCandidatoGUI.resulVotos){
+                mostrarVentanaResultados();
+            }
+            if(e.getSource() == vistaCandidatoGUI.conFinal){
+                mostrarVentanaGanador();
+              
             if(e.getSource() == vistaCandidatoGUI.sali){
             vistaCandidatoGUI.frame.setVisible(false);
             vistaCandidatoGUI.frame.dispose();
             }
         }
-
+        }
     }
     public void mostrarVentanaInsertar() {
         String nombre = JOptionPane.showInputDialog("Ingrese el nombre del candidato:");
@@ -276,7 +286,9 @@ public class ControladorCandidatos  implements ActionListener{
         }
 
         mostrarMensaje("Votos ingresados exitosamente.");
+
         mostrarVentanaResultados();
+
     }
 
     public void mostrarVentanaResultados() {
@@ -299,8 +311,11 @@ public class ControladorCandidatos  implements ActionListener{
         resultadosFrame.getContentPane().add(scrollPane);
         resultadosFrame.pack();
         resultadosFrame.setVisible(true);
+
+
     
         mostrarVentanaGanador();
+
         mostrarCiudadesConMenosCandidatos();
     }
 

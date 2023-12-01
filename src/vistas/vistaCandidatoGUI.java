@@ -1,5 +1,4 @@
 package vistas;
-
 import java.awt.Container;
 import java.awt.FlowLayout;
 
@@ -89,6 +88,9 @@ public class vistaCandidatoGUI extends JFrame implements vistaCandidatos{
         sali.addActionListener(candidato);
         verNombre.addActionListener(candidato);
         verTodos.addActionListener(candidato);
+        canVotos.addActionListener(candidato);
+        resulVotos.addActionListener(candidato);
+        conFinal.addActionListener(candidato);
         frame.setVisible(true);
     }
 
@@ -151,5 +153,3 @@ public class vistaCandidatoGUI extends JFrame implements vistaCandidatos{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setCiudades'");
     }
-
-}
